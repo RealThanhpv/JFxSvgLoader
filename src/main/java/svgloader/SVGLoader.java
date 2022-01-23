@@ -2,7 +2,7 @@ package svgloader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.image.BufferedImage;
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -68,7 +68,7 @@ public class SVGLoader extends SVGParser {
                                 group(group, xml, cas);
                 List<String>  list = listObjects(cont, keys);
 
-                attr = removeUncascadedttributes(attr) + cas;
+                attr = removeUncascadedAttributes(attr) + cas;
 
                 group.getChildren().addAll(buildObjectList(list, attr));                                 
                                 
@@ -89,7 +89,7 @@ public class SVGLoader extends SVGParser {
                     group(group, xml, cas);
 
                     List<String>  list = listObjects(cont, keys);
-                    attr = removeUncascadedttributes(attr) + cas; 
+                    attr = removeUncascadedAttributes(attr) + cas;
                                     
                     group.getChildren().addAll(buildObjectList(list, attr));                                  
                     return nList;
@@ -113,7 +113,7 @@ public class SVGLoader extends SVGParser {
 
             String attr = getAttributeString(xml, "use")+cas;
                      
-            attr = removeUncascadedttributes(attr);
+            attr = removeUncascadedAttributes(attr);
             use.getChildren().addAll(getSymbol(attr));
 
             return nList;
@@ -134,7 +134,7 @@ public class SVGLoader extends SVGParser {
 
                 String attr = getAttributeString(xml, "g");
 
-                attr = removeUncascadedttributes(attr) + cas;
+                attr = removeUncascadedAttributes(attr) + cas;
                 List<String>  list = textSegregate(cont);                 
   
                 group.getChildren().addAll(buildObjectList(list, attr)); 
@@ -192,7 +192,7 @@ public class SVGLoader extends SVGParser {
         List<Node> oList = new ArrayList<>();
               
         int length = list.size();
-	for(int i = 0; i < length; i++) { 
+	    for(int i = 0; i < length; i++) {
                   
             List<Node> nodes = createSVG(list.get(i), cas);
             oList.addAll(nodes); 
@@ -201,8 +201,6 @@ public class SVGLoader extends SVGParser {
 
     }
 
-       
-             
     private Pane pane = new Pane();
 
 }

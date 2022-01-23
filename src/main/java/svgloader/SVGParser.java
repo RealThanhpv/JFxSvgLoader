@@ -1225,7 +1225,7 @@ public abstract class SVGParser {
          * @param s attribute String
          * @return String with cascading attributes
          */
-    protected String removeUncascadedttributes(String s){
+    protected String removeUncascadedAttributes(String s){
              
             int index = s.indexOf("transform");                                    
             if(index > -1)
