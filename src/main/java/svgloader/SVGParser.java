@@ -381,17 +381,16 @@ public abstract class SVGParser {
                             
 				String fId = color.substring(color.indexOf('#')+1, color.indexOf(')'));
 				String defs = chaseOut(SVG, fId, aKeys);                           
-				if(defs.contains("<linearGradient"))
+				if(defs.contains("<linearGradient")) {
 					return getLinearGradient(defs);
+				}
 				else if(defs.contains("<radialGradient")){                             
 					return getRadialGradient(defs);
 				}                                
 			}
 			else {
 				Double op = opacityValue(s, key+"-opacity");
-				if(op == null){
-					return SVGColor.svgColor(color);
-				}
+
 				return SVGColor.svgColor(color, op); // SVGColor API
 			}
 			return null;
@@ -412,9 +411,7 @@ public abstract class SVGParser {
 		
 		if (c != null) {
 			Double op = opacityValue(s, opacity);
-			if(op == null){
-				return SVGColor.svgColor(c);
-			}
+
 			return SVGColor.svgColor(c, op);
 		}
 		return null;
