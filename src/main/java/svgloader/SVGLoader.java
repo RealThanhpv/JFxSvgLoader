@@ -44,20 +44,8 @@ public class SVGLoader extends SVGParser {
         pane.getChildren().addAll(createSVG(SVG, "")); 
         return pane;
     }
-	
-    /**    bufferedSVGImage converts the SVG into JavaFX image    
-    * @return BufferedImage of displaying SVG image    
-    * */    
-    public BufferedImage bufferedSVGImage(){
-        return null;
-    }
-	
-    /**    save the converted SVG as PNG image    
-    * @param name the name of png file (auto-ending with .png. Exp. 'test' becomes 'test.png'    
-    * */    
-    public void saveSVGImage(String name){
-		
-    }
+
+
 	
 	/* root  is the Pane where the converted SVG graphics are placed    
 	 * XML is the string content of SVG document (see SVGParser Constructor)    
