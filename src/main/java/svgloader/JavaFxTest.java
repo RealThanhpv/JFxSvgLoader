@@ -13,6 +13,7 @@ package svgloader;
 	
 import javafx.application.Application;
 
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +34,7 @@ public class JavaFxTest extends Application {
 						
 			Parent root = new Pane(pane);												
 			Scene scene = new Scene(root);
+			scene.setFill(Color.GRAY);
                         
 			primaryStage.setScene(scene);			
 			primaryStage.setTitle("Test SVGLoader Window");		

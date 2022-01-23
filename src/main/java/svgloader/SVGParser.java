@@ -76,8 +76,7 @@ public abstract class SVGParser {
             
        
 
-//            System.out.println(SVG);
-			 			
+
 			  
 	}
 	
@@ -170,8 +169,9 @@ public abstract class SVGParser {
          */      
         public void group(Group group, String xml, String cas){
             String attr = "";
-            if(xml.charAt(1) == 'g')
+            if(xml.charAt(1) == 'g') {
                 attr = getAttributeString(xml, "g") + cas;
+            }
             else 
                 attr = getAttributeString(xml, "svg") + cas;                    
             setGroup(group, attr);
@@ -273,7 +273,7 @@ public abstract class SVGParser {
 		String vs = getString(s, key); 
 
                 if(vs.isEmpty())
-                    return 0.0;  
+                    return 0.0;
                
                 
                 String ns = (vs.split("[pxcmm\\s]")[0]).trim();
@@ -369,34 +369,31 @@ public abstract class SVGParser {
 	@param key String the designated key (e.g. key fill -> <rect...fill="blue".../>)
 	@return Color JavaFX color of the given key
 	*/
+
 	protected Paint getColor(String s, String key) {
 		
 		String color = getString(s, key);
 
-		if(color.isEmpty())
-			return null;
-		else {
+		if (!color.isEmpty()) {
 
-			if(color.indexOf("url") > -1){
-                            
-				String fId = color.substring(color.indexOf('#')+1, color.indexOf(')'));
-				String defs = chaseOut(SVG, fId, aKeys);                           
-				if(defs.contains("<linearGradient")) {
+			if (color.indexOf("url") > -1) {
+
+				String fId = color.substring(color.indexOf('#') + 1, color.indexOf(')'));
+				String defs = chaseOut(SVG, fId, aKeys);
+				if (defs.contains("<linearGradient")) {
 					return getLinearGradient(defs);
-				}
-				else if(defs.contains("<radialGradient")){                             
+				} else if (defs.contains("<radialGradient")) {
 					return getRadialGradient(defs);
-				}                                
-			}
-			else {
-				Double op = opacityValue(s, key+"-opacity");
+				}
+			} else {
+				Double op = opacityValue(s, key + "-opacity");
 
-				return SVGColor.svgColor(color, op); // SVGColor API
+				return SVGColor.svgColor(color, op);
 			}
-			return null;
 		}
-		
-			
+		return null;
+
+
 	}
         /**
 	search and parse the color of the given key with given opacity
@@ -1157,28 +1154,38 @@ public abstract class SVGParser {
             setStyle(text, attr);
         }
         
-     
+
+
+    private double getStrokeWidth(String s){
+            double v = getValue(s, "stroke-width");
+        if(!(v > 0.0000001) )
+            v = 1;
+
+        return v;
+    }
         
     private void setStyle(Shape sh, String s){
-               
-            Paint strk = getColor(s, "stroke");
-            sh.setStroke(strk);
-                 
+
+            Paint stroke = getColor(s, "stroke");
+
+            if(stroke != null) {
+                sh.setStroke(stroke);
+            }
             Paint fill = getColor(s, "fill");
 
-            if(fill != null)                        
+            if(fill != null) {
                 sh.setFill(fill);
-            
-            double sw = getValue(s, "stroke-width");
-        
-	    if(!(sw > 0.0000001) )
-	        sw = 1;
-            
-	    sh.setStrokeWidth(sw);
+            }
+
+            double strokeWidth = getStrokeWidth(s);
+
+
+	    sh.setStrokeWidth(strokeWidth);
 	    Double op = opacityValue(s, "opacity");
 	    if(op !=null) {
 			sh.setOpacity(op);
 		}
+
 		
 	    String arr = getString(s, "stroke-dasharray");
             Double[] dArr = _doubleArray(arr);
@@ -1188,8 +1195,7 @@ public abstract class SVGParser {
 	    Transform trans = getTransform(s);
 	    if(trans != null)
 	         sh.getTransforms().add(trans);
-       
-            
+
             Node clip = getClip(s);
             if(clip != null)
                 sh.setClip(clip);  
@@ -1251,9 +1257,9 @@ public abstract class SVGParser {
             if(index > -1)
                 s = s.replace(s.substring(index, s.indexOf('"', index+4)+1), "");
             
-            index  = s.indexOf("width=");
-            if(index > -1)
-                s = s.replace(s.substring(index, s.indexOf('"', index+8)+1), "");
+//            index  = s.indexOf("width=");
+//            if(index > -1)
+//                s = s.replace(s.substring(index, s.indexOf('"', index+8)+1), "");
             
             index  = s.indexOf("height=");
             if(index > -1)

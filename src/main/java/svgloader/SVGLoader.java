@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
@@ -169,7 +170,7 @@ public class SVGLoader extends SVGParser {
                     
             SVGPath shape = new SVGPath();
             nList.add(shape);
-          shape(shape, xml, cas);
+            shape(shape, xml, cas);
 
             return nList;          
                      
