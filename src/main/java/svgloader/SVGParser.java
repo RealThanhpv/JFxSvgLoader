@@ -388,7 +388,10 @@ public abstract class SVGParser {
 				}                                
 			}
 			else {
-				double op = opacityValue(s, key+"-opacity");
+				Double op = opacityValue(s, key+"-opacity");
+				if(op == null){
+					return SVGColor.svgColor(color);
+				}
 				return SVGColor.svgColor(color, op); // SVGColor API
 			}
 			return null;
@@ -408,8 +411,11 @@ public abstract class SVGParser {
 		String c = getString(s, key);		
 		
 		if (c != null) {
-			double op = opacityValue(s, opacity);
-			return SVGColor.svgColor(c, op); // SVGColor API
+			Double op = opacityValue(s, opacity);
+			if(op == null){
+				return SVGColor.svgColor(c);
+			}
+			return SVGColor.svgColor(c, op);
 		}
 		return null;
 			
@@ -419,12 +425,12 @@ public abstract class SVGParser {
 	@param s String, the parsing string
 	@param key String the designated key (e.g. key fill-opacity -> <rect...fill-opacity="0.5".../>)
 	@return double opacity value of JavaFX color of the given key*/
-	public double opacityValue(String s, String key) {
+	public Double opacityValue(String s, String key) {
 		
 		String valStr = getString(s, key).trim();
                
 		if(valStr.isEmpty())
-            return 1.0;
+            return null;
 		else
             return  Tool.toDouble(valStr);
 	
@@ -1172,7 +1178,10 @@ public abstract class SVGParser {
 	        sw = 1;
             
 	    sh.setStrokeWidth(sw);
-	    sh.setOpacity(opacityValue(s, "opacity"));
+	    Double op = opacityValue(s, "opacity");
+	    if(op !=null) {
+			sh.setOpacity(op);
+		}
 		
 	    String arr = getString(s, "stroke-dasharray");
             Double[] dArr = _doubleArray(arr);
