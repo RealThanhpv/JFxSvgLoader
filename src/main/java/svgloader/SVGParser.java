@@ -388,9 +388,8 @@ public abstract class SVGParser {
 				}                                
 			}
 			else {
-				SVGColor svgColor = new SVGColor();
 				double op = opacityValue(s, key+"-opacity");
-				return svgColor.svgColor(color, op); // SVGColor API
+				return SVGColor.svgColor(color, op); // SVGColor API
 			}
 			return null;
 		}
@@ -409,9 +408,8 @@ public abstract class SVGParser {
 		String c = getString(s, key);		
 		
 		if (c != null) {
-			SVGColor svgColor = new SVGColor();
-			double op = opacityValue(s, opacity);			
-			return svgColor.svgColor(c, op); // SVGColor API
+			double op = opacityValue(s, opacity);
+			return SVGColor.svgColor(c, op); // SVGColor API
 		}
 		return null;
 			

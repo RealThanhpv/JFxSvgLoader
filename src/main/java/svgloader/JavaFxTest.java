@@ -39,7 +39,7 @@ public class JavaFxTest extends Application {
 			
                         
                         if(pl.isEmpty())
-                            loader = new SVGLoader("./tiger1.svg");
+                            loader = new SVGLoader("./tiger2.svg");
                         else
                             loader = new SVGLoader(pl.get(0));	
                         long start = System.currentTimeMillis();

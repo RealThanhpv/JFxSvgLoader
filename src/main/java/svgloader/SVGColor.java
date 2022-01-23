@@ -6,31 +6,16 @@ public class SVGColor {
     /**
     * Constructor
     */
-    public SVGColor( ) {
+    private SVGColor( ) {
     	
     }
-    /**
-    setOpacity sets generally the converted color to this Opacity setting
-    @param opacity double, the opacity grad between 0.0 ... 1.0 (None...Full Transparent)
-    */
-    public void setOpacity(double value) {
-    	value = value > 1? 1:(value < 0? 0:value);
-    	opacity = value;
-    }
-    /*
-    getOpacity returns the Opacity setting
-    @return double the setting opacity grad between 0.0 ... 1.0 (None...Full Transparent)
-    */
-    public double getOpacity( ) {
-		return opacity;
-    	
-    }
+
     /**
     svgColor converts a string to JavaFX color object
     @param color   string, lower case. E.g. white or #ffffff (6x hex)
     @return Color or null if string is invalid...
     */
-    public Color svgColor(String color) {
+    public static Color svgColor(String color) {
 		return svgColor(color, opacity);
     }
     /**
@@ -39,7 +24,7 @@ public class SVGColor {
     @param opacity double, between 0.0 ... 1.0 (None...Full Transparent)
     @return Color or null if string is invalid...
     */
-    public Color svgColor(String color, double value) {
+    public static Color svgColor(String color, double value) {
 
     	
     	try {
@@ -56,5 +41,5 @@ public class SVGColor {
     	return null;		
 		   	
     }
-    private double opacity = 1.0;
+    private static double opacity = 1.0;
 }
