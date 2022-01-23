@@ -6,7 +6,7 @@ Sample 1
 
 sample 2
 
-![image](https://user-images.githubusercontent.com/94328752/150676933-80b3a3eb-4325-4b62-b1e0-d9112c7524d2.png)
+![image](https://user-images.githubusercontent.com/94328752/150680662-f853bf9c-d44e-4d19-93b8-28d44f5f7257.png)
 
 
 
