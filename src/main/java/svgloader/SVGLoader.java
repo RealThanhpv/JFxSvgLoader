@@ -46,18 +46,11 @@ public class SVGLoader extends SVGParser {
     }
 
 
-	
-	/* root  is the Pane where the converted SVG graphics are placed    
-	 * XML is the string content of SVG document (see SVGParser Constructor)    
-	 * idx is the current index (before submerging into next recursive level)    
-	 * */    
 
-//    private final ExecutorService executor = Executors.newWorkStealingPool(5*Runtime.getRuntime().availableProcessors());
     @Override
     public List<Node> createSVG(String xml, String cas) { 
         
         String key = findKey(xml, 0, keys); 
-//              
         List<Node> nList = new ArrayList<Node>();
         char fc = key.charAt(0);
         if(fc == 's' && key.charAt(2)== 'g') { //svg
@@ -73,8 +66,7 @@ public class SVGLoader extends SVGParser {
                 group.setLayoutX(x);
 	        group.setLayoutY(y);
                                 group(group, xml, cas);
-//                executor.submit(new GroupBuilder(group, xml, cas, this));
-                List<String>  list = listObjects(cont, keys);  
+                List<String>  list = listObjects(cont, keys);
 
                 attr = removeUncascadedttributes(attr) + cas;
 
@@ -95,8 +87,7 @@ public class SVGLoader extends SVGParser {
                     Group group = new Group(); 
                     nList.add(group);
                     group(group, xml, cas);
-//                    executor.submit(new GroupBuilder(group, xml, cas, this));
-                                        
+
                     List<String>  list = listObjects(cont, keys);
                     attr = removeUncascadedttributes(attr) + cas; 
                                     
@@ -119,7 +110,6 @@ public class SVGLoader extends SVGParser {
             Group use = new Group(); 
             nList.add(use);
                         use(use, xml, cas);
-//            executor.submit(new UseBuilder(use, xml, cas, this));
 
             String attr = getAttributeString(xml, "use")+cas;
                      
@@ -141,8 +131,7 @@ public class SVGLoader extends SVGParser {
                 Group group = new Group(); 
                 nList.add(group);
                 group(group, xml, cas);
-//                executor.submit(new GroupBuilder(group, xml, cas, this));
-                        
+
                 String attr = getAttributeString(xml, "g");
 
                 attr = removeUncascadedttributes(attr) + cas;
@@ -155,7 +144,6 @@ public class SVGLoader extends SVGParser {
             else {
                 Text text = new Text();
                 text(text, xml, cas);
-//                executor.submit(new TextBuilder(text, xml, cas, this));
                 nList.add(text);
                 return nList;    
             }
@@ -166,8 +154,7 @@ public class SVGLoader extends SVGParser {
             Text text = new Text(); 
             nList.add(text);
           text(text, xml, cas);
-//            executor.submit(new TspanBuilder(text, xml, cas, this));
-                        
+
             return nList;   
         }
         else if(fc == 'i'){ // image/img
@@ -175,8 +162,7 @@ public class SVGLoader extends SVGParser {
             ImageView img = new ImageView();
             nList.add(img);   
           image(img, xml, cas);
-//            executor.submit(new ImageBuilder(img, xml, cas, this));
-                                    
+
             return nList;
         }              
 	else if(!key.isEmpty()) {
@@ -184,8 +170,7 @@ public class SVGLoader extends SVGParser {
             SVGPath shape = new SVGPath();
             nList.add(shape);
           shape(shape, xml, cas);
-//            executor.submit(new ShapeBuilder(shape, xml, cas, this));
-                                
+
             return nList;          
                      
 	}
@@ -204,7 +189,7 @@ public class SVGLoader extends SVGParser {
     @Override  
     public List<Node> buildObjectList(List<String> list, String cas){
        
-        List<Node> oList = new ArrayList<Node>();              
+        List<Node> oList = new ArrayList<>();
               
         int length = list.size();
 	for(int i = 0; i < length; i++) { 
