@@ -7,7 +7,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
@@ -55,7 +54,7 @@ public class SVGLoader extends SVGParser {
         List<Node> nList = new ArrayList<Node>();
         char fc = key.charAt(0);
         if(fc == 's' && key.charAt(2)== 'g') { //svg
-	    xml = removeWeirds(xml);
+	    xml = removeHeadTags(xml);
 	    String cont = getContent(xml);
 	    if(!cont.isEmpty()) {
 	        String attr = getAttributeString(xml, "svg");

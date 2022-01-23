@@ -1269,7 +1269,7 @@ public abstract class SVGParser {
             return s;
                 
     }
-    protected String removeWeirds(String s){
+    protected String removeHeadTags(String s){
             
             int index = s.indexOf("<?xml");
             
