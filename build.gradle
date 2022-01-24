@@ -20,16 +20,11 @@ application {
 
 javafx {
         version = "18-ea+7"
-        modules = ['javafx.graphics'] //
+        modules = ['javafx.graphics']
     }
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+repositories {
+    mavenLocal()
+    mavenCentral()
 
-
-
-    }
+}

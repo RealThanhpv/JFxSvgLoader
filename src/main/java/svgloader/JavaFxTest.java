@@ -35,9 +35,8 @@ public class JavaFxTest extends Application {
             java.util.List<String> pl = params.getRaw();
 
 
-            StackPane pane = new StackPane();
+            StackPane root = new StackPane();
 
-            Parent root = new Pane(pane);
             Scene scene = new Scene(root);
             scene.setFill(Color.GRAY);
 
@@ -51,18 +50,15 @@ public class JavaFxTest extends Application {
             else {
 				loader = new SVGLoader(pl.get(0));
 			}
-            long start = System.currentTimeMillis();
             Pane svgPane = loader.loadSVG();
             svgPane.setScaleX(1);
             svgPane.setScaleY(1);
 
 
-            pane.getChildren().addAll(svgPane);
+            root.getChildren().addAll(svgPane);
             svgPane.setCache(true);
-            long end = System.currentTimeMillis();
             primaryStage.show();
 
-            System.out.println("Total time: " + (end - start) + " mili secs");
 
 
         } catch (Exception e) {
