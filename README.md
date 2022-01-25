@@ -10,7 +10,7 @@ Sample 2
 
 Sample 3
 
-![image](https://user-images.githubusercontent.com/94328752/150921272-2ebfdf90-50b9-4e78-b081-10ea6f2d272e.png)
+![image](https://user-images.githubusercontent.com/94328752/150922487-be6de071-c9e9-468f-893b-e38dd6bc2f83.png)
 
 
 
