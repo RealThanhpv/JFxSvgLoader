@@ -59,13 +59,17 @@ public class SVGLoader extends SVGParser {
 	    if(!cont.isEmpty()) {
 	        String attr = getAttributeString(xml, "svg");
 
-	        double x = getValue(attr, "x");
-                double y = getValue(attr, "y");
+	        Double x = getValue(attr, "x");
+            Double y = getValue(attr, "y");
                 Group group = new Group();
                 nList.add(group);
-                group.setLayoutX(x);
-	        group.setLayoutY(y);
-                                group(group, xml, cas);
+                if(x != null) {
+                    group.setLayoutX(x);
+                }
+                if(y != null) {
+                    group.setLayoutY(y);
+                }
+                group(group, xml, cas);
                 List<String>  list = listObjects(cont, keys);
 
                 attr = removeUncascadedAttributes(attr) + cas;
