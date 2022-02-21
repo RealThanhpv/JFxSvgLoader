@@ -22,11 +22,11 @@ import java.util.Base64;
 import java.util.List;
 
 
-public class SVGParser {
-    protected String dir;
-    protected String SVG;
-    protected String[] keys = {"path", "g", "svg", "text", "tspan", "image", "img", "use", "polygon", "polyline", "rect", "line", "ellipse", "circle"}; //
-    private final String[] aKeys = {"defs", "stop", "linearGradient", "radialGradient", "clipPath", "symbol"};
+public class SVGLoader {
+    static String dir;
+    static String SVG;
+    static final String[] keys = {"path", "g", "svg", "text", "tspan", "image", "img", "use", "polygon", "polyline", "rect", "line", "ellipse", "circle"}; //
+    static final String[] aKeys = {"defs", "stop", "linearGradient", "radialGradient", "clipPath", "symbol"};
 
     /**
      * Constructor
@@ -36,7 +36,7 @@ public class SVGParser {
      *              not contain any block starting with <svg and ending with </svg>
      */
 
-    public SVGParser(String svgName) throws Exception {
+    public SVGLoader(String svgName) throws Exception {
 
 
         byte[] buf = null;
@@ -1348,6 +1348,8 @@ public class SVGParser {
     public Pane loadSVG(){
         Pane pane = new Pane();
         pane.getChildren().addAll(createSVG(SVG, ""));
+        dir = null;
+        SVG = null;
         return pane;
     }
 

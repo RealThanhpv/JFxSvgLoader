@@ -11,7 +11,6 @@ package svgloader;
 
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -42,7 +41,7 @@ public class JavaFxTest extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Test SVGLoader Window");
-            SVGParser loader = new SVGParser("./tiger3.svg");
+            SVGLoader loader = new SVGLoader("./tiger3.svg");
 
 
             Pane svgPane = loader.loadSVG();
