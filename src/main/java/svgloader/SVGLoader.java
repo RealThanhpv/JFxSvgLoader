@@ -23,8 +23,8 @@ import java.util.List;
 
 
 public class SVGLoader {
-    static String dir;
-    static String SVG;
+    private static String dir;
+    private static String SVG;
     static final String[] keys = {"path", "g", "svg", "text", "tspan", "image", "img", "use", "polygon", "polyline", "rect", "line", "ellipse", "circle"}; //
     static final String[] aKeys = {"defs", "stop", "linearGradient", "radialGradient", "clipPath", "symbol"};
 
@@ -93,7 +93,7 @@ public class SVGLoader {
      * @param xml String, the parsing string (e.g. <circle .. style="...."/>)
      * @param cas String, cascading attribute string applied to the shape
      */
-    public void shape(SVGPath sh, String xml, String cas) {
+    private  void shape(SVGPath sh, String xml, String cas) {
         String attr;
         char sc = xml.charAt(1);
         if (sc == 'p' && xml.charAt(2) == 'a') {
@@ -135,7 +135,7 @@ public class SVGLoader {
      * @param s    String, the parsing string (e.g. <text .. style="...."/>)
      * @param cas  String, attribute string that the text will inherit from ancestor elements.
      */
-    public void text(Text text, String s, String cas) {
+    private void text(Text text, String s, String cas) {
         try {
             String attr = getAttributeString(s, "text") + cas;
             byte[] tByte = getContent(s).getBytes("UTF-32");
@@ -154,7 +154,7 @@ public class SVGLoader {
      * @param s    String, the parsing string (e.g. <text .. style="...."/>)
      * @param cas  String, attribute string that the text will inherit from ancestor elements.
      */
-    public void tspan(Text text, String s, String cas) {
+    private void tspan(Text text, String s, String cas) {
         String attr = getAttributeString(s, "tspan") + cas;
         text.setText(new String(getContent(s).getBytes(), StandardCharsets.UTF_16));
         setText(text, attr);
@@ -167,7 +167,7 @@ public class SVGLoader {
      * @param xml   String, parsing string (e.g. <g .. style="...."/>)
      * @param cas   String, attribute string that the group will inherit from ancestor elements.
      */
-    public void group(Group group, String xml, String cas) {
+    private void group(Group group, String xml, String cas) {
         String attr = "";
         if (xml.charAt(1) == 'g') {
             attr = getAttributeString(xml, "g") + cas;
@@ -184,7 +184,7 @@ public class SVGLoader {
      * @param xml String, parsing string (e.g. <image .. style="...."/>)
      * @param cas String, attribute string that text will inherit from ancestor elements.
      */
-    public void image(ImageView img, String xml, String cas) {
+    private void image(ImageView img, String xml, String cas) {
         String attr = getAttributeString(xml, "image");
         if (xml.charAt(3) == 'g')
             attr = getAttributeString(xml, "img");
@@ -222,7 +222,7 @@ public class SVGLoader {
      * @param xml   String, parsing string (e.g. <use .. style="...."/>)
      * @param cas   String, attribute string that the group will inherit from ancestor elements.
      */
-    public void use(Group group, String xml, String cas) {
+    private void use(Group group, String xml, String cas) {
         String attr = getAttributeString(xml, "use") + cas;
         setGroup(group, attr);
 
@@ -250,7 +250,7 @@ public class SVGLoader {
      * @param s String, the parsing string
      * @return double array with 6 elements (see JavaFX or SVG doc)
      */
-    protected Double[] _doubleArray(String s) {
+    private Double[] _doubleArray(String s) {
         if (s.indexOf("none") > -1 || s.isEmpty())
             return null;
 
@@ -265,7 +265,7 @@ public class SVGLoader {
      * @param s String, the parsing string (e.g. <svg .... viewBox="....." ...</svg>)
      * @return double array with (x, y, width, height)
      */
-    public double[] viewBoxData(String s) {
+    private double[] viewBoxData(String s) {
         return doubleArray(getString(s, "viewBox"));
 
     }
@@ -278,7 +278,7 @@ public class SVGLoader {
      *            ..." ...</svg>)
      * @return double the value of the given key
      */
-    public Double getValue(String s, String key) {
+    private Double getValue(String s, String key) {
 
         String vs = getString(s, key);
 
@@ -315,7 +315,7 @@ public class SVGLoader {
      * @param key String the designated key (e.g. key rect -> <rect .... .../>)
      * @return String the content of the given key
      */
-    public String getString(String s, String key) {
+    private String getString(String s, String key) {
 
         int length = key.length();
         int index = s.indexOf(" " + key + "=\"");
@@ -358,7 +358,7 @@ public class SVGLoader {
      * @param cls String name of class
      * @return String class style (e.g. "fill: none; stroke: #E9C348; stroke-width: 1.5277778;stroke-linecap: butt;")
      */
-    protected String getClass(String cls) {
+    private String getClass(String cls) {
 
         int start = SVG.indexOf("." + cls);
         if (start > -1) {
@@ -381,7 +381,7 @@ public class SVGLoader {
      * @return Color JavaFX color of the given key
      */
 
-    protected Paint getColor(String s, String key) {
+    private Paint getColor(String s, String key) {
 
         String color = getString(s, key);
 
@@ -416,7 +416,7 @@ public class SVGLoader {
      * @param opacity opacity value
      * @return Color JavaFX color of the given key
      */
-    protected Color getColor(String s, String key, String opacity) {
+    private Color getColor(String s, String key, String opacity) {
 
         String c = getString(s, key);
 
@@ -436,7 +436,7 @@ public class SVGLoader {
      * @param key String the designated key (e.g. key fill-opacity -> <rect...fill-opacity="0.5".../>)
      * @return double opacity value of JavaFX color of the given key
      */
-    public Double opacityValue(String s, String key) {
+    private Double opacityValue(String s, String key) {
 
         String valStr = getString(s, key).trim();
 
@@ -456,7 +456,7 @@ public class SVGLoader {
      * @param key String the designated key (e.g. key rect -> <rect...fill-opacity="0.5".../>)
      * @return int the index for next search
      */
-    public int svgObject(String[] S, String key, int index) {
+    private int svgObject(String[] S, String key, int index) {
 
         int start = S[0].indexOf("<" + key, index);
 
@@ -504,7 +504,7 @@ public class SVGLoader {
      * @param s String, the parsing string
      * @return String the path content extracted from d="..........."
      */
-    public String svgPathContent(String s) {
+    private String svgPathContent(String s) {
         return getString(s, "d");
     }
 
@@ -550,7 +550,7 @@ public class SVGLoader {
      * @param keys array of valid xml tag keys that will help in case of loop search
      * @return List of valid xml tags
      */
-    protected List<String> listObjects(String s, String[] keys) { // List with a list of keys
+    private List<String> listObjects(String s, String[] keys) { // List with a list of keys
 
         List<String> list = new ArrayList<String>();
         String[] S = {s, null};
@@ -580,7 +580,7 @@ public class SVGLoader {
      * @param key tag key to build list
      * @return list of xml tags
      */
-    protected List<String> listObjects(String s, String key) { // List with a specific key
+    private List<String> listObjects(String s, String key) { // List with a specific key
         List<String> list = new ArrayList<String>();
         String[] S = {s, null};
         int index = 0, length = S[0].length();
@@ -601,7 +601,7 @@ public class SVGLoader {
      * @param s input text string
      * @return list of xml text tags
      */
-    protected List<String> textSegregate(String s) {
+    private List<String> textSegregate(String s) {
 
         List<String> list = new ArrayList<String>();
         String[] S = {s, ""};
@@ -640,7 +640,7 @@ public class SVGLoader {
      * @param keys  array of valid keys that will help to search key in case of loop search.
      * @return
      */
-    protected String findKey(String s, int index, String[] keys) { // Find nearest tag key (combine methods for better speed)
+    private String findKey(String s, int index, String[] keys) { // Find nearest tag key (combine methods for better speed)
 
         int start = s.indexOf('<', index);
 
@@ -690,7 +690,7 @@ public class SVGLoader {
      * @param key xml tag
      * @return attribute string
      */
-    protected String getAttributeString(String xml, String key) { // Get all attribute string of a tag
+    private String getAttributeString(String xml, String key) { // Get all attribute string of a tag
         String attr = xml.substring(xml.indexOf('<') + key.length() + 1, xml.indexOf('>'));
         int cIndex = attr.indexOf("class");
         if (cIndex < 0)
@@ -725,7 +725,7 @@ public class SVGLoader {
      * @param s String parsing string
      * @return StrokeLineCap JavaFx Path stroke line cap
      */
-    public StrokeLineCap getStrokeLineCap(String s) { //
+    private StrokeLineCap getStrokeLineCap(String s) { //
 
         s = getString(s, "stroke-linecap");
         if (s.indexOf('r') == 0)
@@ -741,7 +741,7 @@ public class SVGLoader {
      * @param s String parsing string
      * @return StrokeLineJoin JavaFX Path stroke line join
      */
-    public StrokeLineJoin getStrokeLineJoin(String s) {
+    private StrokeLineJoin getStrokeLineJoin(String s) {
 
         s = getString(s, "stroke-linejoin");
 
@@ -760,7 +760,7 @@ public class SVGLoader {
      * @param s String parsing string
      * @return double stroke miter limit value
      */
-    public Double getStrokeMiterLimit(String s) {
+    private Double getStrokeMiterLimit(String s) {
         return getValue(s, "stroke-miterlimit");
     }
 
@@ -770,7 +770,7 @@ public class SVGLoader {
      * @param s search string
      * @return Javafx Transform object
      */
-    public Transform getTransform(String s) {
+    private Transform getTransform(String s) {
 
         String trans = getString(s, "transform");
 
@@ -815,7 +815,7 @@ public class SVGLoader {
      * @param s String in which has clip-path id
      * @return Node JavaFx node
      */
-    protected Node getClip(String s) {
+    private Node getClip(String s) {
 
         String clipId = getString(s, "clip-path");
 
@@ -845,7 +845,7 @@ public class SVGLoader {
 
     }
 
-    protected Node getMask(String s) {
+    private Node getMask(String s) {
         String maskId = getString(s, "mask");
 
         if (!maskId.isEmpty()) {
@@ -872,7 +872,7 @@ public class SVGLoader {
         return null;
     }
 
-    public List<Node> getSymbol(String attr) {
+    private List<Node> getSymbol(String attr) {
         String symId = getString(attr, "xlink:href");
         if (symId.isEmpty())
             symId = getString(attr, "href");
@@ -905,7 +905,7 @@ public class SVGLoader {
         return null;
     }
 
-    protected String chaseOut(String s, String key, String[] keys) {
+    private String chaseOut(String s, String key, String[] keys) {
 
         int pos = s.indexOf("id=\"" + key);
         if (pos > 0) {
@@ -918,7 +918,7 @@ public class SVGLoader {
         return "";
     }
 
-    protected RadialGradient getRadialGradient(String s) {
+    private RadialGradient getRadialGradient(String s) {
 
         double cx = 0.5, cy = 0.5, r = 0.5, fa = 0.0, fd = 0.0, fx = 0.5, fy = 0.5;
         String cxS = getString(s, "cx"),
@@ -960,7 +960,7 @@ public class SVGLoader {
         return lg;
     }
 
-    protected LinearGradient getLinearGradient(String s) {
+    private LinearGradient getLinearGradient(String s) {
 
         double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
         String x1Str = getString(s, "x1").replace("%", "");
@@ -983,7 +983,7 @@ public class SVGLoader {
         return lg;
     }
 
-    protected List<Stop> buildStopList(List<String> list) {
+    private List<Stop> buildStopList(List<String> list) {
         List<Stop> sList = new ArrayList<Stop>();
 
         for (String s : list) {
@@ -1018,7 +1018,7 @@ public class SVGLoader {
         }
     }
 
-    public void setPath(SVGPath sh, String attr) {
+    private void setPath(SVGPath sh, String attr) {
 
         sh.setContent(svgPathContent(attr));
         sh.setFillRule(getFillRule(attr));
@@ -1031,7 +1031,7 @@ public class SVGLoader {
         setStyle(sh, attr);
     }
 
-    protected void setRect(SVGPath shape, String attr) {
+    private void setRect(SVGPath shape, String attr) {
         Double x = getValue(attr, "x"),
                 y = getValue(attr, "y"),
                 width = getValue(attr, "width"),
@@ -1355,7 +1355,7 @@ public class SVGLoader {
 
 
 
-    public List<Node> createSVG(String xml, String cas) {
+    private List<Node> createSVG(String xml, String cas) {
 
         String key = findKey(xml, 0, keys);
         List<Node> nList = new ArrayList<Node>();
@@ -1512,7 +1512,7 @@ public class SVGLoader {
 
     }
 
-    protected String removeHeadTags(String s) {
+    private String removeHeadTags(String s) {
 
         int index = s.indexOf("<?xml");
 
