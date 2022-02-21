@@ -42,14 +42,9 @@ public class JavaFxTest extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Test SVGLoader Window");
-			SVGLoader loader = null;
+            SVGParser loader = new SVGParser("./tiger3.svg");
 
-            if (pl.isEmpty()) {
-				loader = new SVGLoader("./tiger3.svg");
-			}
-            else {
-				loader = new SVGLoader(pl.get(0));
-			}
+
             Pane svgPane = loader.loadSVG();
             svgPane.setScaleX(1);
             svgPane.setScaleY(1);
