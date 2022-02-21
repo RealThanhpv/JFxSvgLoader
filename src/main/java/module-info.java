@@ -1,6 +1,5 @@
-module svgloader {
+module tpv.jfxsvg {
     requires javafx.graphics;
     requires java.desktop;
-
-    exports svgloader to javafx.graphics;
+    exports tpv.jfxsvg to javafx.graphics;
 }

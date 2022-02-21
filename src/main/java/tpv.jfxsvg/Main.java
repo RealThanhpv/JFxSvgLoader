@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svgloader;
+package tpv.jfxsvg;
 
 /**
  * @author Thanh
@@ -19,8 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class JavaFxTest extends Application {
 
+public class Main extends Application {
 
     public static void main(String[] args) {
 
@@ -28,8 +28,8 @@ public class JavaFxTest extends Application {
 
     }
 
-    public void start(Stage primaryStage) {
-        try {
+    public void start(Stage primaryStage) throws Exception {
+
 
             Application.Parameters params = getParameters();
             java.util.List<String> pl = params.getRaw();
@@ -56,8 +56,6 @@ public class JavaFxTest extends Application {
 
 
 
-        } catch (Exception e) {
-        }
 
     }
 }

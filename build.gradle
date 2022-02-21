@@ -8,23 +8,27 @@
  */
 
  plugins {
-    id "org.openjfx.javafxplugin" version "0.0.10"
-    id "application"
+     id 'java-library'
+     id 'maven'
+     id "org.openjfx.javafxplugin" version "0.0.11"
+     id "application"
  }
 
 
-application {
 
-    mainClassName = 'svgloader.JavaFxTest'
-}
 
 javafx {
-        version = "18-ea+7"
+        version = "18-ea+10"
         modules = ['javafx.graphics']
-    }
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
 
+}
+
+application {
+
+    mainClassName = 'tpv.jfxsvg.Main'
 }

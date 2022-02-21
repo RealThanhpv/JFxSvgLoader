@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svgloader;
+package tpv.jfxsvg;
 
 import java.util.*;
 // Joe Nartca (C)
