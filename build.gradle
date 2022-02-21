@@ -32,6 +32,5 @@ repositories {
 }
 
 //application {
-//
 //    mainClassName = 'tpv.jfxsvg.Main'
 //}
