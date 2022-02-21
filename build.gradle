@@ -14,7 +14,10 @@
 //     id "application"
  }
 
-
+projects {
+    group = 'tpv'
+    version = '1.0'
+}
 
 
 javafx {
