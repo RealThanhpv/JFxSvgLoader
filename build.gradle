@@ -11,7 +11,7 @@
      id 'java-library'
      id 'maven'
      id "org.openjfx.javafxplugin" version "0.0.11"
-     id "application"
+//     id "application"
  }
 
 projects {
@@ -31,6 +31,6 @@ repositories {
 
 }
 
-application {
-    mainClassName = 'tpv.jfxsvg.Main'
-}
+//application {
+//    mainClassName = 'tpv.jfxsvg.Main'
+//}
