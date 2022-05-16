@@ -42,7 +42,7 @@ public class Main extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Test SVGLoader Window");
-//            SVGLoader loader = new SVGLoader("./tiger1.svg");
+
 
 
             Node svgPane = SVGLoader.loadSVG("./tiger1.svg");

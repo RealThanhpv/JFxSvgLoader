@@ -36,38 +36,23 @@ public class SVGLoader {
      *              not contain any block starting with <svg and ending with </svg>
      */
 
-    public SVGLoader(String svgName) throws Exception {
-        byte[] buf = null;
+    private SVGLoader()  {}
 
-        try {
-            FileInputStream inFile = new FileInputStream(svgName);
-            buf = new byte[inFile.available()];
-            inFile.read(buf);
-
-            inFile.close();
-            dir = svgName.replace(svgName.substring(svgName.lastIndexOf('/') + 1), "");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        byte[] first = Arrays.copyOfRange(buf, 0, 100);
-        String encd = new String(first);
-        encd = getString(encd, "encoding");
-        if (encd.isEmpty())
-            encd = "UTF-8";
-
-        SVG = new String(buf, encd)
+    static public Node parse(String svgString){
+        String svg = svgString
                 .replaceAll("[\\n]+", " ")
 //                                .replaceAll(" {2,}", " ")
                 .replaceAll("\\<\\?xml.+\\?\\>", " ")
                 .replaceAll("\\<\\?metadata.+\\?\\>", " ")
                 .replaceAll("<!--[\\s\\S]*?-->", "")
-                .replaceAll("<!DOCTYPE[^>]*>", "")
-//                                .replaceAll("xmlns[^\\s]*\""," ")
-        ;
+                .replaceAll("<!DOCTYPE[^>]*>", "");
+//                                .replaceAll("xmlns[^\\s]*\""," ");
 
-
+        SVG = svg;
+        Group node = new Group();
+        node.getChildren().setAll(createSVG(svg, ""));
+        SVG = null;
+        return node;
     }
 
 
@@ -1373,12 +1358,8 @@ public class SVGLoader {
 //                                .replaceAll("xmlns[^\\s]*\""," ")
         ;
 
-        Group pane = new Group();
-
-        pane.getChildren().addAll(createSVG(SVG, ""));
-        dir = null;
-        SVG = null;
-        return pane;
+        String svg = new String(buf, encd);
+        return parse(svg);
     }
 
 
